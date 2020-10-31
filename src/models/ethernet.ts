@@ -1,35 +1,34 @@
-import { logger } from '../utils/logger';
+import { MacAddress } from './address';
 
-export class MacAddress {
-  components: number[] = [];
-
-  constructor(buf: Buffer) {
-    for (let i = 0; i < 6; i++) {
-      this.components.push(buf.readUInt8(i));
-    }
-  }
-
-  toString() {
-    return this.components.map((n) => n.toString(16)).join(':');
-  }
+export enum EtherType {
+  IPv4 = 0x0800,
+  IPv6 = 0x86dd,
+  ARP = 0x0806,
+  RARP = 0x8035,
+  LOOPBACK = 0x9000,
 }
 
 export class EthernetHeader {
-  static ETHERNET_HEADER_LENGTH = 14;
+  static ETHERNET_HEADER_LENGTH = 14; // bytes
 
-  destinationMac: MacAddress;
-  sourceMac: MacAddress;
-  type: number;
+  destinationMac: MacAddress; // 6 bytes
+  sourceMac: MacAddress; // 6 bytes
+  type: EtherType; // 2 bytes
 
   constructor(buf: Buffer) {
     this.destinationMac = new MacAddress(buf.slice(0, 6));
     this.sourceMac = new MacAddress(buf.slice(6, 12));
-    this.type = buf.readUInt16LE(12);
+    this.type = buf.readUInt16BE(12);
   }
 
-  print() {
-    logger.log('Ethernet Header:');
-    logger.log(`  * Destination MAC : ${this.destinationMac.toString()}`);
-    logger.log(`  * Source MAC      : ${this.sourceMac.toString()}`);
+  get length(): number {
+    return EthernetHeader.ETHERNET_HEADER_LENGTH;
+  }
+
+  toString() {
+    return `Ethernet Header:
+  * Destination MAC : ${this.destinationMac.toString()}
+  * Source MAC      : ${this.sourceMac.toString()}
+  * Type            : ${EtherType[this.type]}`;
   }
 }

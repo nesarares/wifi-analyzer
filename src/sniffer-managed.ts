@@ -1,5 +1,5 @@
 import { createSession, PacketWithHeader } from 'pcap';
-import { Packet } from './models/packet';
+import { TcpPacket } from './models/tcp-packet';
 import { PacketHeader } from './models/packet-header';
 import { logger } from './utils/logger';
 
@@ -19,11 +19,17 @@ const main = () => {
 
   pcap_session.on('packet', function (rawPacket: PacketWithHeader) {
     const header = new PacketHeader(rawPacket.header);
-    const packet = new Packet(rawPacket.buf);
-    const linkType = rawPacket.link_type;
+    logger.log(`----------- [${header.ts.toString()}] -----------`);
 
-    logger.log(`----------- [${header.ts.toString()}] - ${linkType} -----------`);
-    packet.ethernetHeader.print();
+    try {
+      const packet = new TcpPacket(rawPacket.buf);
+      console.log(rawPacket.buf);
+      logger.log(packet.ethernetHeader.toString());
+      logger.log(packet.ipHeader.toString());
+    } catch (error) {
+      logger.log(error.message);
+    }
+
     logger.log('');
   });
 };
