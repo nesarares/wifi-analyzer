@@ -1,4 +1,4 @@
-import chalk from "chalk";
+import { logger } from '../utils/logger';
 
 export class MacAddress {
   components: number[] = [];
@@ -28,8 +28,8 @@ export class EthernetHeader {
   }
 
   print() {
-    console.log(chalk.green("Ethernet Header:"));
-    console.log(`  * Destination MAC : ${chalk.magenta(this.destinationMac.toString())}`);
-    console.log(`  * Source MAC      : ${chalk.magenta(this.sourceMac.toString())}`);
+    logger.log('Ethernet Header:');
+    logger.log(`  * Destination MAC : ${this.destinationMac.toString()}`);
+    logger.log(`  * Source MAC      : ${this.sourceMac.toString()}`);
   }
 }

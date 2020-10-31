@@ -1,6 +1,6 @@
 # WiFi Analyzer & Sniffer
 
-Project for university - Dynamic Networks and Specialized Operating Systems
+University project - Dynamic Networks and Specialized Operating Systems
 
 ### This repository is a work in progress.
 
