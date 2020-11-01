@@ -6,7 +6,9 @@ export class IPv4Header {
   tos: number; // Type Of Service - 1 byte
   totalLength: number; // Total Packet Length (in bytes) - 2 bytes
   identification: number; // Identification - 2 bytes
-  flags: number; // Flags (2 - DF: don't fragment, 4 - MF: more fragments) - 3 bits
+  flags: number; // Flags - 3 bits
+  flagDF: boolean; // Don't fragment flag
+  flagMF: boolean; // More fragments flag
   fragmentOffset: number; // Fragment Offset - 13 bits
   ttl: number; // Time To Live - 1 byte
   protocol: IpProtocol; // Protocol - 1 byte
@@ -15,21 +17,32 @@ export class IPv4Header {
   destinationAddress: IpAddress; // Destination IP Address - 4 bytes
   options?: Buffer; // Optional Options if IHL > 5 - 16 bytes
 
-  constructor(buf: Buffer) {
+  constructor(public buf: Buffer) {
     const vhl = buf.readUInt8(0);
     this.version = vhl >>> 4; // first 4 bits
     this.ihl = vhl & 0x0f; // last 4 bits
+
+    if (this.ihl * 4 > buf.byteLength) {
+      throw new Error('Incomplete IP Header');
+    }
+    buf = buf.slice(0, this.ihl * 4);
+
     this.tos = buf.readUInt8(1);
     this.totalLength = buf.readUInt16BE(2);
     this.identification = buf.readUInt16BE(4);
+
     const flagsFragment = buf.readUInt16BE(6);
     this.flags = flagsFragment >>> 13; // first 3 bits
+    this.flagDF = (this.flags & 0x02) > 0;
+    this.flagMF = (this.flags & 0x04) > 0;
     this.fragmentOffset = flagsFragment & 0x1fff; // last 13 bits
+
     this.ttl = buf.readUInt8(8);
     this.protocol = buf.readUInt8(9);
     this.checksum = buf.readUInt16BE(10);
     this.sourceAddress = new IpAddress(buf.slice(12, 16));
     this.destinationAddress = new IpAddress(buf.slice(16, 20));
+
     if (this.ihl > 5) {
       this.options = buf.slice(20, this.ihl * 4);
     }
@@ -40,13 +53,15 @@ export class IPv4Header {
   }
 
   toString() {
-    return `IPv4 Header:
+    return `IPv4 Header ==========================
   * Version             : ${this.version}
   * IHL                 : ${this.ihl}
   * TOS                 : ${this.tos}
   * Total length        : ${this.totalLength}
   * Identification      : ${this.identification}
   * Flags               : ${this.flags}
+    * DF                : ${this.flagDF}
+    * MF                : ${this.flagMF}
   * Fragment Offset     : ${this.fragmentOffset}
   * TTL                 : ${this.ttl}
   * Protocol            : ${IpProtocol[this.protocol]}

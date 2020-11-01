@@ -4,7 +4,7 @@ import { PacketHeader } from './models/packet-header';
 import { logger } from './utils/logger';
 
 const device = process.argv[2] || 'wlp8s0';
-const filter = 'port 80';
+const filter = 'tcp port 80';
 
 const main = () => {
   const pcap_session = createSession(device, {
@@ -22,10 +22,13 @@ const main = () => {
     logger.log(`----------- [${header.ts.toString()}] -----------`);
 
     try {
-      const packet = new TcpPacket(rawPacket.buf);
-      console.log(rawPacket.buf);
+      const packet = new TcpPacket(rawPacket.buf.slice(0, header.caplen));
       logger.log(packet.ethernetHeader.toString());
       logger.log(packet.ipHeader.toString());
+      logger.log(packet.tcpHeader.toString());
+      if (packet.tcpHeader.destinationPort === 80 && packet.payload) {
+        logger.log(packet.payload.toString());
+      }
     } catch (error) {
       logger.log(error.message);
     }

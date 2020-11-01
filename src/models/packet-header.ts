@@ -18,9 +18,9 @@ export class Timeval {
 }
 
 export class PacketHeader {
-  ts: Timeval; // 8 bytes
-  caplen: number; // 4 bytes
-  len: number; // 4 bytes
+  ts: Timeval; // timestamp - 8 bytes
+  caplen: number; // length of portion present - 4 bytes
+  len: number; // length of this packet - 4 bytes
 
   constructor(buf: Buffer) {
     this.ts = new Timeval(buf.slice(0, 8));

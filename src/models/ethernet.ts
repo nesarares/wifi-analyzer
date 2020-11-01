@@ -15,7 +15,7 @@ export class EthernetHeader {
   sourceMac: MacAddress; // 6 bytes
   type: EtherType; // 2 bytes
 
-  constructor(buf: Buffer) {
+  constructor(public buf: Buffer) {
     this.destinationMac = new MacAddress(buf.slice(0, 6));
     this.sourceMac = new MacAddress(buf.slice(6, 12));
     this.type = buf.readUInt16BE(12);
@@ -26,7 +26,7 @@ export class EthernetHeader {
   }
 
   toString() {
-    return `Ethernet Header:
+    return `Ethernet Header ==========================
   * Destination MAC : ${this.destinationMac.toString()}
   * Source MAC      : ${this.sourceMac.toString()}
   * Type            : ${EtherType[this.type]}`;
