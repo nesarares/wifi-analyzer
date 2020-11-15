@@ -1,5 +1,6 @@
 import { IpAddress } from './address';
 
+// https://en.wikipedia.org/wiki/IPv4#Header
 export class IPv4Header {
   version: number; // Version - 4 bits
   ihl: number; // Internet Header Length (in words) - 4 bits

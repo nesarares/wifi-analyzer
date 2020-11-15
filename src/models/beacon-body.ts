@@ -1,3 +1,5 @@
+// https://mrncciew.com/2014/10/08/802-11-mgmt-beacon-frame/
+// https://www.oreilly.com/library/view/80211-wireless-networks/0596100523/ch04.html
 export class BeaconBody {
   timestamp: bigint; // 8 bytes
   beaconInterval: number; // 2 bytes

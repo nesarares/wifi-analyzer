@@ -1,3 +1,4 @@
+// https://en.wikipedia.org/wiki/Transmission_Control_Protocol#TCP_segment_structure
 export class TcpHeader {
   sourcePort: number; // Source Port - 2 bytes
   destinationPort: number; // Destination Port - 2 bytes

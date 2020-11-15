@@ -3,12 +3,12 @@ import { MacAddress } from './address';
 export class MacHeader {
   static MAC_HEADER_LENGTH = 24; // bytes
 
-	frameControl: number; // 2 bytes
-	duration: number; // 2 bytes
+  frameControl: number; // 2 bytes
+  duration: number; // 2 bytes
   destinationMac: MacAddress; // 6 bytes
   sourceMac: MacAddress; // 6 bytes
   bssid: MacAddress; // 6 bytes
-	seqCtl: number; // 2 bytes
+  seqCtl: number; // 2 bytes
 
   constructor(public buf: Buffer) {
     this.frameControl = buf.readUInt16BE(0);

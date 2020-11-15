@@ -3,6 +3,7 @@ import { IpProtocol, IPv4Header } from './ip';
 import { Payload } from './payload';
 import { TcpHeader } from './tcp';
 
+// http://web.deu.edu.tr/doc/oreily/networking/firewall/ch06_03.htm
 export class TcpPacket {
   ethernetHeader: EthernetHeader;
   ipHeader: IPv4Header;

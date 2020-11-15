@@ -24,8 +24,6 @@ const main = () => {
     
     try {
       const packet = new BeaconPacket(rawPacket.buf.slice(0, header.caplen));
-      // console.log(rawPacket.buf.slice(0, header.caplen).toString('hex'));
-      // console.log(rawPacket.buf.slice(0, header.caplen).toString('ascii'));
       logger.log(packet.radiotapHeader.toString());
       logger.log(packet.macHeader.toString());
       logger.log(packet.body.toString());

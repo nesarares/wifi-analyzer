@@ -2,6 +2,7 @@ import { BeaconBody } from './beacon-body';
 import { MacHeader } from './mac-header';
 import { RadiotapHeader } from './radiotap-header';
 
+// https://mrncciew.com/2014/10/08/802-11-mgmt-beacon-frame/
 export class BeaconPacket {
   radiotapHeader: RadiotapHeader;
   macHeader: MacHeader;

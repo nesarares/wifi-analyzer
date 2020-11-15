@@ -3,6 +3,7 @@ interface RadiotapField {
   length: number; // field length in bytes
 }
 
+// https://github.com/radiotap/radiotap-library/blob/master/radiotap.c
 const radiotapFields: { [key: number]: RadiotapField } = {
   0: { align: 8, length: 8 }, // TSFT
   1: { align: 1, length: 1 }, // Flags
@@ -23,6 +24,8 @@ const radiotapFields: { [key: number]: RadiotapField } = {
   16: { align: 1, length: 1 }, // RTS Retries
 };
 
+// https://www.radiotap.org/
+// http://wifinigel.blogspot.com/2013/11/what-are-radiotap-headers.html
 export class RadiotapHeader {
   version: number; // 1 byte
   pad: number; // 1 byte

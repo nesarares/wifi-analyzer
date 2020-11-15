@@ -17,6 +17,7 @@ export class Timeval {
   }
 }
 
+// https://wiki.wireshark.org/Development/LibpcapFileFormat
 export class PacketHeader {
   ts: Timeval; // timestamp - 8 bytes
   caplen: number; // length of portion present - 4 bytes

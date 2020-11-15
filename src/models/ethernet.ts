@@ -1,5 +1,6 @@
 import { MacAddress } from './address';
 
+// https://en.wikipedia.org/wiki/EtherType
 export enum EtherType {
   IPv4 = 0x0800,
   IPv6 = 0x86dd,
@@ -8,6 +9,7 @@ export enum EtherType {
   LOOPBACK = 0x9000,
 }
 
+// https://en.wikipedia.org/wiki/Ethernet_frame
 export class EthernetHeader {
   static ETHERNET_HEADER_LENGTH = 14; // bytes
 
