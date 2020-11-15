@@ -8,7 +8,7 @@ export class MacAddress {
   }
 
   toString() {
-    return this.components.map((n) => n.toString(16)).join(':');
+    return this.components.map((n) => (n.toString(16)?.length === 1 ? `0${n.toString(16)}` : n.toString(16))).join(':');
   }
 }
 

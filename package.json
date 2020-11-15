@@ -7,7 +7,13 @@
     "analyzer": "ts-node src/wifi-analyzer.ts wlp8s0mon",
     "sniffer:managed": "ts-node src/sniffer-managed.ts wlp8s0"
   },
-  "keywords": ["libpcap", "sniffer", "wifi", "analizer", "802.11"],
+  "keywords": [
+    "libpcap",
+    "sniffer",
+    "wifi",
+    "analizer",
+    "802.11"
+  ],
   "author": "Rares Nesa",
   "license": "ISC",
   "dependencies": {
@@ -15,6 +21,7 @@
     "pcap": "^3.1.0"
   },
   "devDependencies": {
+    "@types/node": "^14.14.7",
     "ts-node": "^9.0.0",
     "typescript": "^4.0.3"
   }
