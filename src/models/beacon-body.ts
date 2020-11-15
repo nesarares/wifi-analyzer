@@ -19,8 +19,9 @@ export class BeaconBody {
 
   toString() {
     return `Beacon body ==========================
-  * Timestamp       : ${this.timestamp} 
-  * Beacon Interval : ${this.beaconInterval};
-  * SSID            : ${this.ssid}`;
+  * Timestamp       : ${this.timestamp} us 
+  * Beacon Interval : ${this.beaconInterval}
+  * SSID            : ${this.ssid}
+  * `;
   }
 }
