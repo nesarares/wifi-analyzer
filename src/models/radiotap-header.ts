@@ -49,7 +49,7 @@ export class RadiotapHeader {
   };
   antennaSignal?: number; // 1 byte
 
-  constructor(public buf: Buffer) {
+  constructor(private buf: Buffer) {
     this.version = buf.readUInt8(0);
     this.pad = buf.readUInt8(1);
     this.len = buf.readUInt16LE(2);
@@ -57,7 +57,7 @@ export class RadiotapHeader {
     let presentFields = buf.readUInt32LE(4);
     let offset = 8;
     this.present = presentFields;
-    while (presentFields >>> 31 > 0) {
+    while (((presentFields >>> 31) & 1) > 0) {
       presentFields = buf.readUInt32LE(offset);
       offset += 4;
     }
@@ -71,7 +71,7 @@ export class RadiotapHeader {
       }
 
       // Check if field is present
-      if ((this.present & (2 ** currentFlag)) === 0) continue;
+      if (((this.present >>> currentFlag) & 1) === 0) continue;
 
       switch (currentFlag) {
         case 3:
@@ -123,5 +123,16 @@ export class RadiotapHeader {
       * Dynamic CCK-OFDM  : ${this.channel?.flags?.dynamic}
       * GFSK              : ${this.channel?.flags?.GFSK}
   * Antenna signal        : ${this.antennaSignal}`;
+  }
+
+  toObject() {
+    return {
+      version: this.version,
+      pad: this.pad,
+      len: this.len,
+      present: this.present,
+      channel: this.channel,
+      antennaSignal: this.antennaSignal,
+    };
   }
 }

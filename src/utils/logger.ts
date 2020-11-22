@@ -15,5 +15,5 @@ class Logger {
   }
 }
 
-// export const logger = new Logger({ type: 'file', filePath: constants.logFilePath });
-export const logger = new Logger({ type: 'console' });
+export const logger = new Logger({ type: 'file', filePath: constants.LOG_FILE_PATH });
+// export const logger = new Logger({ type: 'console' });

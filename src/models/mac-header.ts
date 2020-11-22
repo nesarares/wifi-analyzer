@@ -1,5 +1,6 @@
 import { MacAddress } from './address';
 
+// https://www.oreilly.com/library/view/80211-wireless-networks/0596100523/ch04.html
 export class MacHeader {
   static MAC_HEADER_LENGTH = 24; // bytes
 
@@ -10,7 +11,7 @@ export class MacHeader {
   bssid: MacAddress; // 6 bytes
   seqCtl: number; // 2 bytes
 
-  constructor(public buf: Buffer) {
+  constructor(private buf: Buffer) {
     this.frameControl = buf.readUInt16BE(0);
     this.duration = buf.readUInt16BE(2);
     this.destinationMac = new MacAddress(buf.slice(4, 10));
@@ -25,11 +26,22 @@ export class MacHeader {
 
   toString() {
     return `MAC Header ==========================
-  * Frame control   : ${this.frameControl}
+  * Frame control   : ${this.frameControl.toString(2)}
   * Duration        : ${this.duration}
   * Destination MAC : ${this.destinationMac.toString()}
   * Source MAC      : ${this.sourceMac.toString()}
   * BSSID           : ${this.bssid.toString()}
   * Seq-ctl         : ${this.seqCtl}`;
+  }
+
+  toObject() {
+    return {
+      frameControl: this.frameControl,
+      duration: this.duration,
+      destinationMac: this.destinationMac.toString(),
+      sourceMac: this.sourceMac.toString(),
+      bssid: this.bssid.toString(),
+      seqCtl: this.seqCtl,
+    }
   }
 }
