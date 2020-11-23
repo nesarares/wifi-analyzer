@@ -4,6 +4,7 @@ import { PacketHeader } from './models/packet-header';
 import { logger } from './utils/logger';
 import { constants } from './utils/constants';
 import { exec } from 'child_process';
+import fs from 'fs';
 
 const device = process.argv[2] || 'wlp8s0mon';
 const filter = 'type mgt subtype beacon';
@@ -37,6 +38,8 @@ const main = () => {
   changeWifiChannel(1);
   setInterval(changeWifiChannel, constants.CHANGE_WIFI_CHANNEL_INTERVAL);
 
+  const packets: any[] = [];
+
   pcap_session.on('packet', function (rawPacket: PacketWithHeader) {
     const header = new PacketHeader(rawPacket.header);
     logger.log(`----------- [${header.ts.toString()}] -----------`);
@@ -51,6 +54,12 @@ const main = () => {
       logger.log(packet.macHeader.toString());
       logger.log(packet.body.toString());
       logger.log('');
+
+      packets.push(packet.toObject());
+
+      if (packets.length === 20) {
+        fs.writeFileSync("packets.json", JSON.stringify(packets));
+      }
     } catch (error) {
       console.error(error);
       // logger.log(error.message);
