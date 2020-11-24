@@ -30,4 +30,4 @@ University project - Dynamic Networks and Specialized Operating System
 ### WiFi Analyzer (terminal mode)
 
 * set device to monitor mode `sudo setam.sh start <device_name>`
-* `sudo npm run analyzer:cli`
+* `sudo npm run analyzer`

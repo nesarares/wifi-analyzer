@@ -4,11 +4,12 @@
   "description": "",
   "main": "dist/wifi-analyzer-ui.js",
   "scripts": {
+    "clean-install": "rm package-lock.json && rm -rf node_modules/ && npm install",
     "copy-assets": "copyfiles -u 1 src/**/*.html src/**/*.css src/**/*.woff src/**/*.woff2 src/**/*.json src/**/*.svg dist",
     "build": "tsc && npm run copy-assets",
-    "analyzer": "ts-node src/wifi-analyzer-cli.ts wlp8s0mon",
+    "analyzer": "npm run build && node dist/wifi-analyzer-cli.js wlp8s0mon",
     "analyzer:ui": "npm run build && electron ./dist/wifi-analyzer-ui.js --no-sandbox",
-    "sniffer:managed": "ts-node src/sniffer-managed.ts wlp8s0"
+    "sniffer:managed": "npm run build && node dist/sniffer-managed.js wlp8s0"
   },
   "keywords": [
     "libpcap",

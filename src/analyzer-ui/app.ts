@@ -132,7 +132,7 @@ ipcRenderer.on('packet', (event: any, packet: any) => {
 });
 
 document.getElementById('download')!.onclick = () => {
-  new Promise((resolve, reject) => {
+  new Promise<void>((resolve, reject) => {
     const url = window.URL.createObjectURL(
       new Blob([JSON.stringify(aps)], {
         type: 'text/json',
