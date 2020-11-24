@@ -14,7 +14,7 @@ function createWindow() {
       nodeIntegration: true,
       preload: path.join(__dirname, 'analyzer-ui/preload.js'),
     },
-    width: 1000,
+    width: 600,
   });
 
   mainWindow.loadFile(path.join(__dirname, 'analyzer-ui/index.html'));
@@ -24,7 +24,7 @@ function createWindow() {
     webContents.send('packet', packet);
   });
 
-  webContents.openDevTools();
+  // webContents.openDevTools();
 }
 
 app.on('ready', () => {

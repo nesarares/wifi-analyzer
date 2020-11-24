@@ -1,8 +1,6 @@
 # WiFi Analyzer & Sniffer
 
-University project - Dynamic Networks and Specialized Operating Systems
-
-### This repository is a work in progress.
+University project - Dynamic Networks and Specialized Operating System
 
 ## Requirements
 
@@ -16,13 +14,20 @@ University project - Dynamic Networks and Specialized Operating Systems
 * `npm install`
 * find device name using iwconfig / ifconfig (e.g. wlp8s0)
 
-### WiFi Analyzer
-
-* set device to monitor mode `sudo setiw.sh start <device_name>`
-* `sudo npm run analyzer`
-
 ### Sniffer (managed mode)
 
 * if device is in monitor mode, set it back to managed mode `sudo setiw.sh stop <device_name>` and connect to a wifi network
 * `sudo npm run sniffer:managed`
 * open any http website
+
+### WiFi Analyzer (desktop app)
+
+* set device to monitor mode `sudo setam.sh start <device_name>`
+* `sudo npm run analyzer:ui`
+
+![Wi-Fi Analyzer](https://i.imgur.com/LdTheaW.png)
+
+### WiFi Analyzer (terminal mode)
+
+* set device to monitor mode `sudo setam.sh start <device_name>`
+* `sudo npm run analyzer:cli`
