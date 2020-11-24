@@ -74,6 +74,7 @@ html {
 body {
   margin: 0;
   padding: 24px;
+  overflow-y: scroll;
 }
 
 h2,
@@ -88,12 +89,40 @@ h1 {
   font-size: 3rem;
 }
 
-h1, h2 {
+h1,
+h2 {
   font-weight: 900;
 }
 
 h3 {
   font-weight: 700;
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+header button {
+  width: 64px;
+  height: 64px;
+  padding: 0;
+  margin: 0 0 0 1rem;
+  border: none;
+  background: none;
+  border-radius: 8px;
+  box-shadow: 6px 6px 8px 0 rgba(0, 0, 0, 0.3), -6px -6px 8px 0 rgba(255, 255, 255, 0.75);
+  outline: none;
+  cursor: pointer;
+  transition: all 200ms ease;
+}
+header button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+header button img {
+  max-width: 60%;
+  max-height: 60%;
 }
 
 #access-points {
@@ -125,16 +154,54 @@ h3 {
   padding-bottom: 16px;
   position: relative;
   font-size: 20px;
+  overflow: hidden;
+  border: 2px solid #181841;
+}
+.access-point .power .red, .access-point .power .green, .access-point .power .yellow {
+  position: absolute;
+  top: 0;
+  transform-origin: bottom;
+}
+.access-point .power .red, .access-point .power .green {
+  width: 54%;
+  height: 50%;
+  left: 23%;
+  clip-path: polygon(50% 100%, 0 0, 100% 0);
+}
+.access-point .power .red {
+  background: #d42a2a;
+  transform: rotate(-100deg);
+}
+.access-point .power .green {
+  background: #2bbb2b;
+  transform: rotate(100deg);
+}
+.access-point .power .yellow {
+  width: 100%;
+  height: 60%;
+  background: #dfe235;
+  left: 0;
+}
+.access-point .power .clip {
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  background: #181841;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  transform: translateX(-50%) translateY(-50%);
 }
 .access-point .power .handle {
-  width: 45%;
+  width: 48%;
   position: absolute;
   top: 50%;
   left: 50%;
   height: 2px;
-  background-color: #ff9633;
+  background-color: white;
   transform: rotate(-45deg);
   transform-origin: bottom left;
+  transition: transform 1000ms ease;
 }
 .access-point .power .handle::before {
   content: "";
@@ -145,6 +212,9 @@ h3 {
   position: absolute;
   top: -3px;
   left: -2px;
+}
+.access-point .power .signal {
+  z-index: 5;
 }
 .access-point .power::after {
   content: "dBm";

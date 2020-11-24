@@ -1,7 +1,6 @@
 @font-face {
   font-family: 'Inter';
-  src: url('fonts/Inter-Bold.woff2') format('woff2'),
-      url('fonts/Inter-Bold.woff') format('woff');
+  src: url('fonts/Inter-Bold.woff2') format('woff2'), url('fonts/Inter-Bold.woff') format('woff');
   font-weight: bold;
   font-style: normal;
   font-display: swap;
@@ -9,8 +8,7 @@
 
 @font-face {
   font-family: 'Inter';
-  src: url('fonts/Inter-Black.woff2') format('woff2'),
-      url('fonts/Inter-Black.woff') format('woff');
+  src: url('fonts/Inter-Black.woff2') format('woff2'), url('fonts/Inter-Black.woff') format('woff');
   font-weight: 900;
   font-style: normal;
   font-display: swap;
@@ -18,8 +16,7 @@
 
 @font-face {
   font-family: 'Inter';
-  src: url('fonts/Inter-ExtraBold.woff2') format('woff2'),
-      url('fonts/Inter-ExtraBold.woff') format('woff');
+  src: url('fonts/Inter-ExtraBold.woff2') format('woff2'), url('fonts/Inter-ExtraBold.woff') format('woff');
   font-weight: 800;
   font-style: normal;
   font-display: swap;
@@ -27,8 +24,7 @@
 
 @font-face {
   font-family: 'Inter';
-  src: url('fonts/Inter-ExtraLight.woff2') format('woff2'),
-      url('fonts/Inter-ExtraLight.woff') format('woff');
+  src: url('fonts/Inter-ExtraLight.woff2') format('woff2'), url('fonts/Inter-ExtraLight.woff') format('woff');
   font-weight: 200;
   font-style: normal;
   font-display: swap;
@@ -36,8 +32,7 @@
 
 @font-face {
   font-family: 'Inter';
-  src: url('fonts/Inter-Regular.woff2') format('woff2'),
-      url('fonts/Inter-Regular.woff') format('woff');
+  src: url('fonts/Inter-Regular.woff2') format('woff2'), url('fonts/Inter-Regular.woff') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -45,8 +40,7 @@
 
 @font-face {
   font-family: 'Inter';
-  src: url('fonts/Inter-Medium.woff2') format('woff2'),
-      url('fonts/Inter-Medium.woff') format('woff');
+  src: url('fonts/Inter-Medium.woff2') format('woff2'), url('fonts/Inter-Medium.woff') format('woff');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -54,8 +48,7 @@
 
 @font-face {
   font-family: 'Inter';
-  src: url('fonts/Inter-Thin.woff2') format('woff2'),
-      url('fonts/Inter-Thin.woff') format('woff');
+  src: url('fonts/Inter-Thin.woff2') format('woff2'), url('fonts/Inter-Thin.woff') format('woff');
   font-weight: 100;
   font-style: normal;
   font-display: swap;
@@ -63,8 +56,7 @@
 
 @font-face {
   font-family: 'Inter';
-  src: url('fonts/Inter-Light.woff2') format('woff2'),
-      url('fonts/Inter-Light.woff') format('woff');
+  src: url('fonts/Inter-Light.woff2') format('woff2'), url('fonts/Inter-Light.woff') format('woff');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
@@ -72,16 +64,15 @@
 
 @font-face {
   font-family: 'Inter';
-  src: url('fonts/Inter-SemiBold.woff2') format('woff2'),
-      url('fonts/Inter-SemiBold.woff') format('woff');
+  src: url('fonts/Inter-SemiBold.woff2') format('woff2'), url('fonts/Inter-SemiBold.woff') format('woff');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
 
 * {
-	box-sizing: border-box;
-	font-family: 'Inter';
+  box-sizing: border-box;
+  font-family: 'Inter';
 }
 
 html {
@@ -90,8 +81,9 @@ html {
 }
 
 body {
-	margin: 0;
-	padding: 24px;
+  margin: 0;
+  padding: 24px;
+  overflow-y: scroll;
 }
 
 h2,
@@ -103,21 +95,52 @@ ul {
 }
 
 h1 {
-	font-size: 3rem;
+  font-size: 3rem;
 }
 
-h1, h2 {
-	font-weight: 900;
+h1,
+h2 {
+  font-weight: 900;
 }
 
 h3 {
-	font-weight: 700;
+  font-weight: 700;
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  button {
+    width: 64px;
+    height: 64px;
+    padding: 0;
+    margin: 0 0 0 1rem;
+    border: none;
+    background: none;
+    border-radius: 8px;
+    box-shadow: 6px 6px 8px 0 rgba(0, 0, 0, 0.3), -6px -6px 8px 0 rgba(255, 255, 255, 0.75);
+    outline: none;
+    cursor: pointer;
+    transition: all 200ms ease;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    img {
+      max-width: 60%;
+      max-height: 60%;
+    }
+  }
 }
 
 #access-points {
-	display: grid;
-	grid-template-columns: auto;
-	row-gap: 1.5rem;
+  display: grid;
+  grid-template-columns: auto;
+  row-gap: 1.5rem;
 }
 
 .access-point {
@@ -126,17 +149,19 @@ h3 {
   grid-template-areas:
     'power    details'
     'security security';
-	column-gap: 1.3rem;
-	
-	box-shadow: 6px 6px 8px 0 rgba(0, 0, 0, 0.3), -6px -6px 8px 0 rgba(255, 255, 255, 0.75);
-	padding: 1rem;
-	border-radius: 8px;
+  column-gap: 1.3rem;
 
+  box-shadow: 6px 6px 8px 0 rgba(0, 0, 0, 0.3), -6px -6px 8px 0 rgba(255, 255, 255, 0.75);
+  padding: 1rem;
+  border-radius: 8px;
+
+  
   .power {
+    $powerBg: #181841;
     grid-area: power;
     width: 100px;
     height: 100px;
-    background: #181841;
+    background: $powerBg;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -146,17 +171,63 @@ h3 {
     padding-bottom: 16px;
     position: relative;
     font-size: 20px;
+    overflow: hidden;
+    border: 2px solid $powerBg;
+
+    .red, .green, .yellow {
+      position: absolute;
+      top: 0;
+      transform-origin: bottom;
+    }
+
+    .red, .green {
+      width: 54%;
+      height: 50%;
+      left: 23%;
+      clip-path: polygon(50% 100%, 0 0, 100% 0);
+    }
+
+    .red {
+      background: #d42a2a;
+      transform: rotate(-100deg);
+    }
+
+    .green {
+      background: #2bbb2b;
+      transform: rotate(100deg);
+    }
+
+    .yellow {
+      width: 100%;
+      height: 60%;
+      background: #dfe235;
+      left: 0;
+    }
+
+    .clip {
+      $clipWidth: 80%;
+      position: absolute;
+      width: $clipWidth;
+      height: $clipWidth;
+      background: $powerBg;
+      left: 50%;
+      top: 50%;
+      border-radius: 50%;
+      transform: translateX(-50%) translateY(-50%);
+    }
 
     .handle {
-      width: 45%;
+      width: 48%;
       position: absolute;
       top: 50%;
       left: 50%;
       height: 2px;
-      background-color: #ff9633;
+      // background-color: #ff9633;
+      background-color: white;
 
       transform: rotate(-45deg);
       transform-origin: bottom left;
+      transition: transform 1000ms ease;
 
       &::before {
         content: '';
@@ -170,6 +241,10 @@ h3 {
       }
     }
 
+    .signal {
+      z-index: 5;
+    }
+
     &::after {
       content: 'dBm';
       position: absolute;
@@ -179,30 +254,30 @@ h3 {
   }
 
   .general-details {
-		grid-area: details;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-	}
-	
-	&:hover {
-		.security-details {
-			max-height: 400px;
-		}
-	}
+    grid-area: details;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  &:hover {
+    .security-details {
+      max-height: 400px;
+    }
+  }
 
   .security-details {
-		grid-area: security;
-		max-height: 0;
-		overflow: hidden;
-		transition: all 500ms ease;
+    grid-area: security;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 500ms ease;
 
-		h3 {
-			margin: 1rem 0;
-		}
+    h3 {
+      margin: 1rem 0;
+    }
 
-		ul {
-			margin-bottom: 0.5rem;
-		}
+    ul {
+      margin-bottom: 0.5rem;
+    }
   }
 }

@@ -16,11 +16,89 @@ export class BeaconPacket {
     this.body = new BeaconBody(buf.slice(this.radiotapHeader.length + this.macHeader.length));
   }
 
-  toObject() {
+  toObject(): BeaconPacketObject {
     return {
       radiotapHeader: this.radiotapHeader.toObject(),
       macHeader: this.macHeader.toObject(),
       body: this.body.toObject(),
     };
   }
+}
+
+
+export interface BeaconPacketObject {
+  radiotapHeader: {
+    version: number;
+    pad: number;
+    len: number;
+    present: number;
+    channel:
+      | {
+          frequency: number;
+          flags: {
+            turbo: boolean;
+            CCK: boolean;
+            OFDM: boolean;
+            TwoGhz: boolean;
+            FiveGhz: boolean;
+            passiveScan: boolean;
+            dynamic: boolean;
+            GFSK: boolean;
+          };
+        }
+      | undefined;
+    antennaSignal: number | undefined;
+  };
+  macHeader: {
+    frameControl: number;
+    duration: number;
+    destinationMac: string;
+    sourceMac: string;
+    bssid: string;
+    seqCtl: number;
+  };
+  body: {
+    timestamp: string;
+    beaconInterval: number;
+    capabilityInfo: number;
+    ssid: string;
+    currentChannel: number | undefined;
+    rsn:
+      | {
+          version: number;
+          groupCipherSuite: {
+            oui: string;
+            suiteType: number;
+          };
+          pairwiseCipherSuites: {
+            oui: string;
+            suiteType: number;
+          }[];
+          authenticationCipherSuites: {
+            oui: string;
+            suiteType: number;
+          }[];
+          RSNCapabilities: number;
+        }
+      | undefined;
+    wpa:
+      | {
+          version: number;
+          groupCipherSuite: {
+            oui: string;
+            suiteType: number;
+          };
+          pairwiseCipherSuites: {
+            oui: string;
+            suiteType: number;
+          }[];
+          authenticationCipherSuites: {
+            oui: string;
+            suiteType: number;
+          }[];
+          RSNCapabilities: number;
+        }
+      | undefined;
+    vendorSpecificOUIs: string[] | undefined;
+  };
 }
