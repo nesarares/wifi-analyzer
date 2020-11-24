@@ -4,7 +4,7 @@
   "description": "",
   "main": "dist/wifi-analyzer-ui.js",
   "scripts": {
-    "clean-install": "rm package-lock.json && rm -rf node_modules/ && npm install",
+    "clean-install": "rm package-lock.json && rm -rf node_modules/ && npm install && electron-rebuild",
     "copy-assets": "copyfiles -u 1 src/**/*.html src/**/*.css src/**/*.woff src/**/*.woff2 src/**/*.json src/**/*.svg dist",
     "build": "tsc && npm run copy-assets",
     "analyzer": "npm run build && node dist/wifi-analyzer-cli.js wlp8s0mon",
@@ -29,6 +29,7 @@
     "copyfiles": "^2.4.0",
     "electron": "^9.3.1",
     "electron-builder": "^22.9.1",
+    "electron-rebuild": "^2.3.2",
     "ts-node": "^9.0.0",
     "typescript": "^4.0.3"
   },
