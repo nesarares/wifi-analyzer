@@ -2,14 +2,12 @@ import { createSession, PacketWithHeader } from 'pcap';
 import { TcpPacket } from './models/tcp-packet';
 import { PacketHeader } from './models/packet-header';
 import { logger } from './utils/logger';
-
-const device = process.argv[2] || 'wlp8s0';
-const filter = 'tcp';
+import { constants } from './utils/constants';
 
 const main = () => {
-  const pcap_session = createSession(device, {
+  const pcap_session = createSession(constants.DEVICE, {
     promiscuous: true,
-    filter,
+    filter: constants.SNIFFER_FILTER,
   });
   const linkType = pcap_session.link_type;
 

@@ -97,7 +97,7 @@ export class BeaconBody {
     this.capabilityInfo = buf.readUInt16LE(10);
     const ssidElementId = buf.readUInt8(12);
     const ssidLength = buf.readUInt8(13);
-    this.ssid = buf.slice(14, 14 + ssidLength).toString('ascii');
+    this.ssid = buf.slice(14, 14 + ssidLength).toString('utf-8');
 
     let offset = 14 + ssidLength;
     while (offset < buf.byteLength) {

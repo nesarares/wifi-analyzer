@@ -1,9 +1,9 @@
 import { app, BrowserWindow } from 'electron';
 import * as path from 'path';
+import { constants } from './utils/constants';
 import { WifiAnalyzer } from './wifi-analyzer';
 
-const device = 'wlp8s0mon';
-const wifiAnalyzer = new WifiAnalyzer(device);
+const wifiAnalyzer = new WifiAnalyzer(constants.DEVICE);
 wifiAnalyzer.run();
 
 function createWindow() {

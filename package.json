@@ -4,12 +4,12 @@
   "description": "",
   "main": "dist/wifi-analyzer-ui.js",
   "scripts": {
-    "clean-install": "rm package-lock.json && rm -rf node_modules/ && npm install && electron-rebuild",
     "copy-assets": "copyfiles -u 1 src/**/*.html src/**/*.css src/**/*.woff src/**/*.woff2 src/**/*.json src/**/*.svg dist",
     "build": "tsc && npm run copy-assets",
-    "analyzer": "npm run build && node dist/wifi-analyzer-cli.js wlp8s0mon",
+    "analyzer": "npm run build && node dist/wifi-analyzer-cli.js",
     "analyzer:ui": "npm run build && electron ./dist/wifi-analyzer-ui.js --no-sandbox",
-    "sniffer:managed": "npm run build && node dist/sniffer-managed.js wlp8s0"
+    "sniffer:managed": "npm run build && node dist/sniffer-managed.js",
+    "rebuild-electron": "electron-builder install-app-deps"
   },
   "keywords": [
     "libpcap",
@@ -22,12 +22,12 @@
   "license": "ISC",
   "dependencies": {
     "chalk": "^4.1.0",
+    "electron": "^11.0.3",
     "pcap": "^3.1.0"
   },
   "devDependencies": {
-    "@types/node": "^14.14.7",
+    "@types/node": "^12.19.0",
     "copyfiles": "^2.4.0",
-    "electron": "^9.3.1",
     "electron-builder": "^22.9.1",
     "electron-rebuild": "^2.3.2",
     "ts-node": "^9.0.0",

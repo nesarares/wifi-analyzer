@@ -1,6 +1,5 @@
+import { constants } from './utils/constants';
 import { WifiAnalyzer } from './wifi-analyzer';
 
-const device = process.argv[2] || 'wlp8s0mon';
-
-const wifiAnalyzer = new WifiAnalyzer(device);
+const wifiAnalyzer = new WifiAnalyzer(constants.DEVICE);
 wifiAnalyzer.run();

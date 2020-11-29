@@ -5,8 +5,6 @@ import { logger } from './utils/logger';
 import { constants } from './utils/constants';
 import { exec } from 'child_process';
 
-const filter = 'type mgt subtype beacon';
-
 export class WifiAnalyzer {
   currentChannel = 1;
   listeners: ((packet: BeaconPacketObject) => void)[] = [];
@@ -33,7 +31,7 @@ export class WifiAnalyzer {
     const pcap_session = createSession(this.device, {
       monitor: true,
       promiscuous: false,
-      filter,
+      filter: constants.ANALYZER_FILTER,
     });
     const linkType = pcap_session.link_type;
 
