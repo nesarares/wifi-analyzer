@@ -1,6 +1,11 @@
 // import { BeaconPacketObject } from '../models/beacon-packet';
 const { ipcRenderer } = window.require('electron');
 
+const clamp = (n: number, min: number, max: number) => (n < min ? min : n > max ? max : n);
+
+const mapNumberToRange = (n: number, inputStart: number, inputEnd: number, outputStart: number, outputEnd: number) =>
+  ((n - inputStart) * (outputEnd - outputStart)) / (inputEnd - inputStart) + outputStart;
+
 const mapPacketToInfo = (packet: any) => ({
   signal: packet.radiotapHeader.antennaSignal,
   ssid: packet.body.ssid,
@@ -44,7 +49,7 @@ const makeSecurityDiv = (title: string, rsn: any) => `
 
 const makeAPDiv = (ap: any) => {
   // <div class="access-point" id="${ap.mac}">
-  const rotationDeg = mapNumberToRange(ap.signal, -90, -30, -220, 40);
+  const rotationDeg = mapNumberToRange(clamp(ap.signal, -30, -90), -90, -30, -220, 40);
   return `
     <div class="power">
       <div class="yellow"></div>
@@ -74,13 +79,9 @@ let canUpdateUi = false;
 let firstPacket = false;
 const apContainerDOM = document.getElementById('access-points');
 
-const mapNumberToRange = (n: number, inputStart: number, inputEnd: number, outputStart: number, outputEnd: number) =>
-  ((n - inputStart) * (outputEnd - outputStart)) / (inputEnd - inputStart) + outputStart;
-
 const updateUi = () => {
   if (!canUpdateUi) return;
   canUpdateUi = false;
-  console.log(aps);
 
   aps.forEach((ap) => {
     const apDOM = document.getElementById(ap.mac);
@@ -92,7 +93,7 @@ const updateUi = () => {
       apContainerDOM?.appendChild(apNode);
     } else {
       // Update fields
-      const rotationDeg = mapNumberToRange(ap.signal, -90, -30, -220, 40);
+      const rotationDeg = mapNumberToRange(clamp(ap.signal, -90, -30), -90, -30, -220, 40);
       (apDOM.querySelector('.handle') as any).style.transform = `rotate(${rotationDeg}deg)`;
       apDOM.querySelector('.signal')!.textContent = ap.signal;
       apDOM.querySelector('.ssid')!.textContent = ap.ssid;
